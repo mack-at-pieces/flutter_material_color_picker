@@ -11,6 +11,7 @@ class CircleColor extends StatelessWidget {
   final double circleSize;
   final double? elevation;
   final IconData? iconSelected;
+  final double? iconSelectedSize;
 
   const CircleColor({
     Key? key,
@@ -20,6 +21,7 @@ class CircleColor extends StatelessWidget {
     this.isSelected = false,
     this.elevation = _kColorElevation,
     this.iconSelected,
+    this.iconSelectedSize,
   })  : assert(circleSize >= 0, "You must provide a positive size"),
         assert(!isSelected || (isSelected && iconSelected != null)),
         super(key: key);
@@ -37,7 +39,13 @@ class CircleColor extends StatelessWidget {
         child: CircleAvatar(
           radius: circleSize / 2,
           backgroundColor: color,
-          child: isSelected ? Icon(iconSelected, color: icon) : null,
+          child: isSelected
+              ? Icon(
+                  iconSelected,
+                  color: icon,
+                  size: iconSelectedSize,
+                )
+              : null,
         ),
       ),
     );

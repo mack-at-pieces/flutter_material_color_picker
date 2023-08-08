@@ -15,6 +15,7 @@ class MaterialColorPicker extends StatefulWidget {
   final double circleSize;
   final double spacing;
   final IconData iconSelected;
+  final double? iconSelectedSize;
   final VoidCallback? onBack;
   final double? elevation;
   final WrapAlignment alignment;
@@ -32,6 +33,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.allowShades = true,
     this.onlyShadeSelection = false,
     this.iconSelected = Icons.check,
+    this.iconSelectedSize,
     this.circleSize = 45.0,
     this.spacing = 9.0,
     this.onBack,
@@ -91,9 +93,7 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
       }
     }
 
-    return (shadeColor is ColorSwatch && _colors.contains(shadeColor))
-        ? shadeColor
-        : null;
+    return (shadeColor is ColorSwatch && _colors.contains(shadeColor)) ? shadeColor : null;
   }
 
   bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
@@ -105,8 +105,7 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
 
   void _onMainColorSelected(ColorSwatch color) {
     var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
-    final shadeColor =
-        isShadeOfMain ? _shadeColor : (color[500] ?? color[400]!);
+    final shadeColor = isShadeOfMain ? _shadeColor : (color[500] ?? color[400]!);
 
     setState(() {
       _mainColor = color;
@@ -142,6 +141,7 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
           isSelected: _mainColor == color,
           iconSelected: widget.iconSelected,
           elevation: widget.elevation,
+          iconSelectedSize: widget.iconSelectedSize,
         )
     ];
   }
@@ -176,15 +176,15 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
           isSelected: _shadeColor == color,
           iconSelected: widget.iconSelected,
           elevation: widget.elevation,
+          iconSelectedSize: widget.iconSelectedSize,
         ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final listChildren = _isMainSelection || !widget.allowShades
-        ? _buildListMainColor(_colors)
-        : _buildListShadesColor(_mainColor);
+    final listChildren =
+        _isMainSelection || !widget.allowShades ? _buildListMainColor(_colors) : _buildListShadesColor(_mainColor);
 
     return SingleChildScrollView(
       physics: widget.physics,
