@@ -36,6 +36,8 @@ class CircleColor extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       shape: const CircleBorder(),
       child: InkWell(
+        mouseCursor: SystemMouseCursors.click,
+        splashFactory: InkSplash.splashFactory,
         onTap: onColorChoose != null ? () => onColorChoose!(color) : null,
         child: CircleAvatar(
           radius: circleSize / 2,
