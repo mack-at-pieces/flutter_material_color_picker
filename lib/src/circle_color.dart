@@ -31,11 +31,12 @@ class CircleColor extends StatelessWidget {
     final brightness = ThemeData.estimateBrightnessForColor(color);
     final icon = brightness == Brightness.light ? Colors.black : Colors.white;
 
-    return GestureDetector(
-      onTap: onColorChoose != null ? () => onColorChoose!(color) : null,
-      child: Material(
-        elevation: elevation ?? _kColorElevation,
-        shape: const CircleBorder(),
+    return Material(
+      elevation: elevation ?? _kColorElevation,
+      clipBehavior: Clip.hardEdge,
+      shape: const CircleBorder(),
+      child: InkWell(
+        onTap: onColorChoose != null ? () => onColorChoose!(color) : null,
         child: CircleAvatar(
           radius: circleSize / 2,
           backgroundColor: color,
