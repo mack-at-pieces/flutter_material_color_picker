@@ -21,6 +21,7 @@ class MaterialColorPicker extends StatefulWidget {
   final WrapAlignment alignment;
   final WrapAlignment runAlignment;
   final WrapCrossAlignment crossAxisAlignment;
+  final Widget? backArrow;
 
   const MaterialColorPicker({
     Key? key,
@@ -41,6 +42,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.alignment = WrapAlignment.start,
     this.runAlignment = WrapAlignment.center,
     this.crossAxisAlignment = WrapCrossAlignment.center,
+    this.backArrow,
   }) : super(key: key);
 
   @override
@@ -163,7 +165,7 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
 
   List<Widget> _buildListShadesColor(ColorSwatch color) {
     return [
-      IconButton(
+      widget.backArrow ?? IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: _onBack,
         padding: const EdgeInsets.only(right: 2.0),
