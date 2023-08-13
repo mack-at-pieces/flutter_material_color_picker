@@ -165,10 +165,18 @@ class MaterialColorPickerState extends State<MaterialColorPicker> {
 
   List<Widget> _buildListShadesColor(ColorSwatch color) {
     return [
-      widget.backArrow ?? IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: _onBack,
-        padding: const EdgeInsets.only(right: 2.0),
+      Material(
+        clipBehavior: Clip.hardEdge,
+        borderRadius: BorderRadius.circular(100),
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: _onBack,
+          radius: 4,
+          child: const Icon(
+            Icons.arrow_back,
+            size: 16,
+          ),
+        ),
       ),
       for (final color in _getMaterialColorShades(color))
         CircleColor(
